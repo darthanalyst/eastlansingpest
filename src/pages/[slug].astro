@@ -1,0 +1,124 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import FaqList from "../components/FaqList.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Icon from "../components/Icon.astro";
+import { site, homeServices } from "../data/site.js";
+import { services, serviceBySlug } from "../data/services.js";
+import { areas, areaBySlug } from "../data/areas.js";
+import { orgNode, serviceNode, breadcrumb, faqNode } from "../lib/schema.js";
+
+export function getStaticPaths() {
+  return [
+    ...services.map((x) => ({ params: { slug: x.slug }, props: { kind: "service" } })),
+    ...areas.map((x) => ({ params: { slug: x.slug }, props: { kind: "area" } })),
+  ];
+}
+const { slug } = Astro.params;
+const { kind } = Astro.props;
+const svc = kind === "service" ? serviceBySlug[slug] : null;
+const area = kind === "area" ? areaBySlug[slug] : null;
+const svcCards = homeServices.map((s) => serviceBySlug[s]);
+---
+{kind === "service" && (
+  <Base title={svc.title} description={svc.meta} path={`/${svc.slug}/`} ogImage={`/images/${svc.img}`}
+    schema={[orgNode(),
+      serviceNode({ name: svc.label, serviceType: svc.serviceType, description: svc.meta, path: `/${svc.slug}/` }),
+      breadcrumb([{ name: "Home", path: "/" }, { name: "Pest Control", path: "/services/" }, { name: svc.label, path: `/${svc.slug}/` }]),
+      faqNode(svc.faqs)]}>
+    <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Pest Control", path: "/services/" }, { name: svc.label, path: `/${svc.slug}/` }]} />
+    <section class="shero">
+      <div class="wrap shero-in">
+        <div class="shero-tx">
+          <span class="shero-tag"><span class="shero-ic"><Icon name={svc.icon} cls="ic" /></span>{svc.tag}</span>
+          <h1>{svc.h1}</h1>
+          <p class="shero-sub">{svc.sub}</p>
+          <div class="shero-cta">
+            <a href={site.phoneHref} class="btn btn--green btn--lg"><Icon name="phone" cls="ic" /> Call {site.phone}</a>
+            <span class="shero-note">Same-day help often available in East Lansing</span>
+          </div>
+        </div>
+        <div class="shero-media"><img src={`/images/${svc.img}`} alt={svc.imgAlt} width="720" height="540" fetchpriority="high" /></div>
+      </div>
+    </section>
+    <section class="sbody">
+      <div class="wrap sbody-in">
+        <article class="sbody-main">
+          <p class="lead">{svc.lead}</p>
+          {svc.sections.map((sec) => (<div class="sblock"><h2>{sec.h2}</h2>{sec.body.map((p) => <p>{p}</p>)}</div>))}
+          <div class="sblock"><h2>Related pest control services</h2><div class="rel-row">
+            {svc.related.map((r) => { const rs = serviceBySlug[r]; return (
+              <a class="rel-card" href={`/${rs.slug}/`}><span class="rel-ic"><Icon name={rs.icon} cls="ic" /></span><span>{rs.label}</span></a>
+            ); })}
+          </div></div>
+        </article>
+        <aside class="sbody-side">
+          <div class="side-card side-card--call">
+            <h3>Dealing with this pest?</h3>
+            <p>Call and connect with a local East Lansing exterminator serving the whole Lansing area.</p>
+            <a href={site.phoneHref} class="btn btn--lime btn--full"><Icon name="phone" cls="ic" /> {site.phone}</a>
+            <span class="side-hours"><Icon name="clock" cls="ic" /> {site.hoursLine}</span>
+          </div>
+          <div class="side-card"><h3>What's included</h3><ul class="side-checks">
+            {svc.checks.map((c) => (<li><Icon name="check" cls="ic" />{c}</li>))}
+          </ul></div>
+          <div class="side-card side-card--areas"><h3>Service area</h3><p>East Lansing · Okemos · Haslett · Lansing · Holt · Mason · Williamston · DeWitt</p></div>
+        </aside>
+      </div>
+    </section>
+    <FaqList faqs={svc.faqs} title={`${svc.label} in East Lansing: FAQ`} sub={`Common questions about ${svc.label.toLowerCase()} in East Lansing and the Lansing area.`} />
+    <CtaBand title="Got pests?" em="Let's take care of it." text={`Call now and connect with a local exterminator for ${svc.label.toLowerCase()} in East Lansing. Describe what you are dealing with and get honest help. Same-day service is often available.`} />
+  </Base>
+)}
+
+{kind === "area" && (
+  <Base title={area.title} description={area.meta} path={`/${area.slug}/`}
+    schema={[orgNode(),
+      serviceNode({ name: `Pest Control in ${area.name}`, serviceType: "Pest control", description: area.meta, path: `/${area.slug}/`, cities: [area.name] }),
+      breadcrumb([{ name: "Home", path: "/" }, { name: "Service Area", path: `/${area.slug}/` }, { name: area.name, path: `/${area.slug}/` }])]}>
+    <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Service Area", path: `/${area.slug}/` }, { name: area.name, path: `/${area.slug}/` }]} />
+    <section class="ahero">
+      <div class="wrap ahero-in">
+        <span class="ahero-tag"><Icon name="pin" cls="ic" /> {area.name}, MI</span>
+        <h1>{area.h1}</h1>
+        <p class="ahero-sub">{area.sub}</p>
+        <a href={site.phoneHref} class="btn btn--lime btn--lg"><Icon name="phone" cls="ic" /> Call {site.phone}</a>
+      </div>
+    </section>
+    <section class="abody">
+      <div class="wrap abody-in">
+        <article class="abody-main">
+          {area.body.map((p) => <p>{p}</p>)}
+          <div class="abody-land">
+            <h2>Around {area.name}</h2>
+            <div class="land-row">
+              {area.landmarks.map((l) => (<span class="land-chip"><Icon name="pin" cls="ic" /> {l}</span>))}
+            </div>
+          </div>
+          <div class="abody-svc">
+            <h2>Pest services in {area.name}</h2>
+            <div class="rel-row">
+              {svcCards.map((rs) => (<a class="rel-card" href={`/${rs.slug}/`}><span class="rel-ic"><Icon name={rs.icon} cls="ic" /></span><span>{rs.label}</span></a>))}
+            </div>
+          </div>
+        </article>
+        <aside class="sbody-side">
+          <div class="side-card side-card--call">
+            <h3>Pest problem in {area.name}?</h3>
+            <p>Call and connect with a local exterminator serving {area.name} and the rest of the Lansing area.</p>
+            <a href={site.phoneHref} class="btn btn--lime btn--full"><Icon name="phone" cls="ic" /> {site.phone}</a>
+            <span class="side-hours"><Icon name="clock" cls="ic" /> {site.hoursLine}</span>
+          </div>
+          <div class="side-card"><h3>What we handle</h3><ul class="side-checks">
+            <li><Icon name="check" cls="ic" />Ants, spiders, and roaches</li>
+            <li><Icon name="check" cls="ic" />Mice and rats</li>
+            <li><Icon name="check" cls="ic" />Mosquitoes and ticks</li>
+            <li><Icon name="check" cls="ic" />Bed bugs and fall invaders</li>
+          </ul></div>
+        </aside>
+      </div>
+    </section>
+    <CtaBand title={`Pests in ${area.name}?`} em="We can help." text={`Call now and connect with a local exterminator serving ${area.name}. Describe what you are dealing with and get honest help. Same-day service is often available.`} />
+  </Base>
+)}
