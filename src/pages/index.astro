@@ -1,0 +1,68 @@
+---
+import Base from "../layouts/Base.astro";
+import PestGrid from "../components/PestGrid.astro";
+import ServiceCards from "../components/ServiceCards.astro";
+import CallBand from "../components/CallBand.astro";
+import TreatingBand from "../components/TreatingBand.astro";
+import Promises from "../components/Promises.astro";
+import Process from "../components/Process.astro";
+import GreenerBand from "../components/GreenerBand.astro";
+import FaqList from "../components/FaqList.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Icon from "../components/Icon.astro";
+import { site, homeServices } from "../data/site.js";
+import { serviceBySlug } from "../data/services.js";
+import { orgNode, websiteNode, itemListNode, faqNode } from "../lib/schema.js";
+
+const svc = homeServices.map((s) => serviceBySlug[s]);
+const listItems = svc.map((s) => ({ name: s.label, path: `/${s.slug}/` }));
+
+const faqs = [
+  { q: "What pests do you handle in East Lansing?", a: "The full range of Michigan home pests: ants, spiders, roaches, wasps and hornets, mice and rats, mosquitoes and ticks, bed bugs, and the fall invaders like boxelder bugs, stink bugs, and Asian lady beetles." },
+  { q: "Do I need pest control year-round in Michigan?", a: "Pest pressure changes with the season here, so a plan that treats across the year works far better than a one-time spray. Spring ants, summer spiders and mosquitoes, and fall invaders each need different timing." },
+  { q: "How fast can someone come out?", a: "Call 517-293-6988 and you can connect with a local East Lansing exterminator, often the same day." },
+  { q: "Which areas do you cover?", a: "East Lansing and the greater Lansing area, including Okemos, Haslett, Lansing, Holt, Mason, Williamston, and DeWitt, plus the neighborhoods across the city." },
+  { q: "Are treatments safe around my family and pets?", a: "Treatments are chosen and placed with your family, pets, and yard in mind, targeted to where pests travel and nest rather than blanket-sprayed everywhere. Your exterminator will walk you through it." },
+  { q: "Do you handle rentals and student housing?", a: "Yes. East Lansing has a lot of rentals and student housing near MSU, and we handle homes, apartments, and rentals, which matters most for bed bugs and rodents where units share walls." },
+];
+---
+<Base
+  title="Pest Control East Lansing MI | Exterminator Near You"
+  description="Local pest control in East Lansing, MI. Ants, spiders, rodents, mosquitoes, ticks, and bed bugs handled inside and out. Call 517-293-6988 for same-day help."
+  path="/"
+  schema={[orgNode(), websiteNode(), itemListNode(listItems), faqNode(faqs)]}
+>
+  <section class="hero">
+    <div class="hero-media" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="wrap hero-in">
+      <div class="hero-tx">
+        <span class="hero-over">Local pest control you can call</span>
+        <h1>Pests hate us,<br />East Lansing loves us</h1>
+        <p class="hero-sub">Ants, spiders, rodents, mosquitoes, ticks, and bed bugs, handled inside and out with a plan built for the Michigan seasons.</p>
+        <div class="hero-cta">
+          <a href={site.phoneHref} class="btn btn--lime btn--xl"><Icon name="phone" cls="ic" /> Call {site.phone}</a>
+          <a href="/services/" class="btn btn--ghost btn--xl">See our services</a>
+        </div>
+        <div class="hero-trust">
+          <span><Icon name="check" cls="ic" /> Same-day help</span>
+          <span><Icon name="check" cls="ic" /> Interior and exterior</span>
+          <span><Icon name="check" cls="ic" /> Local Michigan crew</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-torn" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0 40 L0 20 Q 30 8 60 16 T 120 14 T 180 20 T 240 10 T 300 18 T 360 12 T 420 20 T 480 10 T 540 18 T 600 12 T 660 20 T 720 10 T 780 18 T 840 12 T 900 20 T 960 10 T 1020 18 T 1080 12 T 1140 20 T 1200 14 L 1200 40 Z" fill="#ffffff"/></svg>
+    </div>
+  </section>
+
+  <PestGrid />
+  <ServiceCards />
+  <CallBand />
+  <TreatingBand />
+  <Promises />
+  <Process />
+  <GreenerBand />
+  <FaqList faqs={faqs} title="Ask the pest experts" sub="Common questions about pest control in East Lansing and the greater Lansing area." />
+  <CtaBand />
+</Base>

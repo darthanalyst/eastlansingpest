@@ -1,0 +1,35 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Icon from "../components/Icon.astro";
+import { site } from "../data/site.js";
+import { orgNode, breadcrumb } from "../lib/schema.js";
+---
+<Base
+  title="About | East Lansing Pest Control"
+  description="East Lansing Pest Control connects homeowners with local exterminators across the greater Lansing area. Pests handled the right way, season to season."
+  path="/about/"
+  schema={[orgNode(), breadcrumb([{ name: "Home", path: "/" }, { name: "About", path: "/about/" }])]}
+>
+  <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "About", path: "/about/" }]} />
+  <section class="pagehead">
+    <div class="wrap">
+      <h1>About East Lansing Pest Control</h1>
+      <p>Local pest help for East Lansing and the greater Lansing area.</p>
+    </div>
+  </section>
+  <section class="prose">
+    <div class="wrap prose-in">
+      <p>East Lansing Pest Control connects homeowners across the greater Lansing area with local exterminators who handle pests the right way. When you call, you reach someone who works mid-Michigan every day and knows how the seasons here move ants, spiders, rodents, mosquitoes, ticks, and the fall invaders through the year.</p>
+      <h2>Built for the Michigan seasons</h2>
+      <p>Pest control in Michigan is a seasonal game. Spring wakes up the ants and early nesters, summer brings spiders, wasps, mosquitoes, and ticks, and fall sends boxelder bugs, stink bugs, Asian lady beetles, and mice pushing toward warm walls before the cold. A one-time spray does not hold against that. Our focus is a plan that treats across the year and stays ahead of what is active.</p>
+      <h2>Local knowledge matters</h2>
+      <p>East Lansing has its own pest picture: older homes and a lot of student rentals near MSU, wooded lots and the Red Cedar corridor that feed mosquitoes and ticks, and the cold winters that drive rodents and fall invaders indoors. Knowing where pests travel in this area and when they show up is the difference between a fix that lasts and one that fails in a few weeks.</p>
+      <h2>Simple to reach</h2>
+      <p>Call {site.phone} and connect with a local East Lansing exterminator, often the same day. Describe what you are dealing with, and get honest help.</p>
+      <a href={site.phoneHref} class="btn btn--green btn--lg"><Icon name="phone" cls="ic" /> Call {site.phone}</a>
+    </div>
+  </section>
+  <CtaBand />
+</Base>

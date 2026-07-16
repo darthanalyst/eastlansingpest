@@ -1,0 +1,39 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { site } from "../data/site.js";
+import { orgNode, breadcrumb } from "../lib/schema.js";
+---
+<Base
+  title="Privacy Policy | East Lansing Pest Control"
+  description="Privacy policy for East Lansing Pest Control. How we handle information when you call or use this site to connect with a local exterminator."
+  path="/privacy-policy/"
+  schema={[orgNode(), breadcrumb([{ name: "Home", path: "/" }, { name: "Privacy Policy", path: "/privacy-policy/" }])]}
+>
+  <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Privacy Policy", path: "/privacy-policy/" }]} />
+  <section class="pagehead">
+    <div class="wrap">
+      <h1>Privacy Policy</h1>
+      <p>How {site.brand} handles information when you use this site or call.</p>
+    </div>
+  </section>
+  <section class="prose">
+    <div class="wrap prose-in">
+      <p>{site.brand} respects your privacy. This policy explains what information we collect, how we use it, and the choices you have. By using this site, you agree to the practices described here.</p>
+      <h2>Information we collect</h2>
+      <p>When you call the number on this site, standard call information such as your phone number may be collected so a local exterminator can return your call and help with your pest problem. If you reach out by phone, you may choose to share your name, address, and details about the pests you are dealing with. We do not require you to submit a form on this site to get help.</p>
+      <h2>How we use information</h2>
+      <p>Information you share is used to connect you with a local service provider, respond to your request, and help schedule pest control service. We do not sell your personal information.</p>
+      <h2>Service providers</h2>
+      <p>{site.brand} is a free service that helps homeowners connect with local service providers. When you call, your request may be shared with an independent provider who can handle the work. Those providers operate independently and have their own practices for handling information.</p>
+      <h2>Cookies and analytics</h2>
+      <p>This site may use standard cookies and analytics tools to understand how visitors use the site so we can improve it. You can set your browser to refuse cookies, though some parts of the site may not work as intended.</p>
+      <h2>Third-party links</h2>
+      <p>This site may link to other websites. We are not responsible for the privacy practices or content of sites we do not operate. Review the privacy policy of any site you visit.</p>
+      <h2>Changes to this policy</h2>
+      <p>We may update this policy from time to time. Any changes will be posted on this page. Please check back so you stay informed about how we handle information.</p>
+      <h2>Contact</h2>
+      <p>Questions about this policy? Call {site.phone} and we will be glad to help.</p>
+    </div>
+  </section>
+</Base>

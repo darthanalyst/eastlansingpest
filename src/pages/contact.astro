@@ -1,0 +1,57 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Icon from "../components/Icon.astro";
+import { site, footerAreas } from "../data/site.js";
+import { orgNode, breadcrumb } from "../lib/schema.js";
+---
+<Base
+  title="Contact | East Lansing Pest Control"
+  description="Contact East Lansing Pest Control. Call 517-293-6988 to connect with a local exterminator serving East Lansing and the greater Lansing area, often same-day."
+  path="/contact/"
+  schema={[orgNode(), breadcrumb([{ name: "Home", path: "/" }, { name: "Contact", path: "/contact/" }])]}
+>
+  <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Contact", path: "/contact/" }]} />
+  <section class="pagehead">
+    <div class="wrap">
+      <h1>Contact East Lansing Pest Control</h1>
+      <p>The fastest way to get help is a phone call. Call and connect with a local exterminator serving East Lansing and the greater Lansing area.</p>
+    </div>
+  </section>
+  <section class="contact">
+    <div class="wrap contact-in">
+      <div class="contact-card">
+        <span class="contact-ic"><Icon name="phone" cls="ic" /></span>
+        <h2>Call now</h2>
+        <p>Tell us what you are dealing with and get connected with a local East Lansing exterminator, often the same day.</p>
+        <a href={site.phoneHref} class="btn btn--green btn--xl btn--full"><Icon name="phone" cls="ic" /> {site.phone}</a>
+        <p class="contact-hours"><Icon name="clock" cls="ic" /> {site.hoursLine}</p>
+      </div>
+      <div class="contact-info">
+        <div class="contact-row">
+          <span class="contact-ic-sm"><Icon name="pin" cls="ic" /></span>
+          <div>
+            <b>Service area</b>
+            <p>East Lansing and the greater Lansing area, including {footerAreas.join(", ")}, plus the neighborhoods across the city.</p>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-ic-sm"><Icon name="clock" cls="ic" /></span>
+          <div>
+            <b>Hours</b>
+            <p>{site.hoursLine}. Same-day help is often available for urgent pest problems.</p>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-ic-sm"><Icon name="check" cls="ic" /></span>
+          <div>
+            <b>What to expect</b>
+            <p>No forms and no waiting. One phone call connects you with a local exterminator who can talk through the problem and get you scheduled.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <CtaBand />
+</Base>

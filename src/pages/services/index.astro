@@ -1,0 +1,40 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Icon from "../../components/Icon.astro";
+import { site, homeServices } from "../../data/site.js";
+import { serviceBySlug } from "../../data/services.js";
+import { orgNode, itemListNode, breadcrumb } from "../../lib/schema.js";
+const svc = homeServices.map((s) => serviceBySlug[s]);
+const listItems = svc.map((s) => ({ name: s.label, path: `/${s.slug}/` }));
+---
+<Base
+  title="Pest Control Services East Lansing MI | Exterminator"
+  description="Pest control services in East Lansing, MI: general pest control, rodent control, mosquito and tick control, and bed bug control. Call 517-293-6988."
+  path="/services/"
+  schema={[orgNode(), itemListNode(listItems), breadcrumb([{ name: "Home", path: "/" }, { name: "Pest Control", path: "/services/" }])]}
+>
+  <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Pest Control", path: "/services/" }]} />
+  <section class="pagehead">
+    <div class="wrap">
+      <h1>Pest Control Services in East Lansing</h1>
+      <p>One local team for the pests Michigan homes actually deal with, from spring ants to fall invaders, handled inside and out.</p>
+    </div>
+  </section>
+  <section class="svcpage">
+    <div class="wrap svcpage-grid">
+      {svc.map((s) => (
+        <a class="svcpage-card" href={`/${s.slug}/`}>
+          <span class="svcpage-media"><img src={`/images/${s.img}`} alt={s.imgAlt} width="440" height="280" loading="lazy" /><span class="svcpage-ic"><Icon name={s.icon} cls="ic" /></span></span>
+          <span class="svcpage-tx">
+            <b>{s.label}</b>
+            <span>{s.card}</span>
+            <span class="svcpage-more">Learn more <Icon name="arrow" cls="ic" /></span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+  <CtaBand />
+</Base>

@@ -1,0 +1,66 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import FaqList from "../components/FaqList.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Icon from "../components/Icon.astro";
+import { site } from "../data/site.js";
+import { orgNode, breadcrumb, faqNode } from "../lib/schema.js";
+
+const bugs = [
+  { icon: "ant", name: "Ants", blurb: "Pavement and odorous house ants trail into kitchens; carpenter ants tunnel into damp or aging wood. The most common year-round East Lansing pest." },
+  { icon: "spider", name: "Spiders", blurb: "Follow other insects indoors and settle in basements, garages, and window corners. More a nuisance than a danger, but a sign of other pests." },
+  { icon: "rat", name: "Mice", blurb: "House mice pour indoors as Michigan turns cold, nesting in walls, attics, and basements and slipping through gaps the width of a dime." },
+  { icon: "beetle", name: "Fall invaders", blurb: "Boxelder bugs, brown marmorated stink bugs, Asian lady beetles, and cluster flies gather on warm walls each fall and push inside to overwinter." },
+  { icon: "wasp", name: "Wasps & hornets", blurb: "Paper wasps, yellowjackets, and hornets build nests under eaves, in shrubs, and along fences through the summer." },
+  { icon: "mosquito", name: "Mosquitoes & ticks", blurb: "Breed and hide in damp, shaded, and wooded spots near the Red Cedar and lakes. Tick and Lyme pressure has climbed across Michigan." },
+  { icon: "bedbug", name: "Bed bugs", blurb: "Hitchhike in on luggage and furniture and spread fast in a college town. Hide in mattress seams, frames, and nearby cracks." },
+  { icon: "roach", name: "Cockroaches", blurb: "Turn up in kitchens, bathrooms, and shared housing, drawn to warmth, moisture, and food. Best handled early before they establish." },
+];
+
+const faqs = [
+  { q: "What is the most common pest in East Lansing homes?", a: "Ants are the year-round constant, but the biggest seasonal events are the fall invaders (boxelder bugs, stink bugs, and Asian lady beetles) pushing indoors in autumn and mice moving in as the cold sets." },
+  { q: "Why do bugs come inside every fall in Michigan?", a: "As temperatures drop, boxelder bugs, stink bugs, Asian lady beetles, cluster flies, and mice look for warm places to overwinter. They gather on sunny walls and slip inside through small gaps." },
+  { q: "Are ticks a real concern here?", a: "Yes. Homes near the Red Cedar corridor, lakes, wooded lots, and tall grass see real tick pressure, and Michigan tick and Lyme numbers have climbed in recent years." },
+  { q: "How do I keep pests out for good?", a: "Sealing entry points, treating the exterior barrier, and timing treatments to the season is what keeps pests out. A one-time spray does not hold against Michigan's changing pest pressure." },
+];
+---
+<Base
+  title="Pest Library | East Lansing Michigan Pests"
+  description="Identify the pests common in East Lansing, MI, the signs they leave, and what keeps them out. Ants, mice, fall invaders, ticks, and more. Call 517-293-6988."
+  path="/pest-library/"
+  schema={[orgNode(), breadcrumb([{ name: "Home", path: "/" }, { name: "Pest Library", path: "/pest-library/" }]), faqNode(faqs)]}
+>
+  <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Pest Library", path: "/pest-library/" }]} />
+  <section class="pagehead">
+    <div class="wrap">
+      <h1>East Lansing Pest Library</h1>
+      <p>The pests that show up in East Lansing and mid-Michigan homes, the signs they leave, and what keeps them out.</p>
+    </div>
+  </section>
+  <section class="pid">
+    <div class="wrap pid-grid">
+      {bugs.map((b) => (
+        <div class="pid-card">
+          <span class="pid-ic"><Icon name={b.icon} cls="ic" /></span>
+          <h3>{b.name}</h3>
+          <p>{b.blurb}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+  <section class="ridbody">
+    <div class="wrap ridbody-in">
+      <div class="ridblock">
+        <h2>Signs you have a pest problem</h2>
+        <p>The signs depend on the pest. Ant trails along counters and foundations, spider webs in corners and basements, droppings and gnaw marks from mice, clusters of boxelder bugs or lady beetles on sunny walls in fall, wasp nests under the eaves, and itchy bites or small blood spots on bedding from bed bugs. Catching any of these early keeps a small problem from turning into an infestation.</p>
+      </div>
+      <div class="ridblock">
+        <h2>What actually keeps pests out</h2>
+        <p>Michigan pest pressure changes with the season, so lasting control is about staying ahead of it, not reacting after the fact. That means sealing the gaps pests use, treating an exterior barrier around the home, clearing webs and nests, and timing treatments to what is active, spring ants, summer spiders and mosquitoes, and fall invaders. Do that and the home stays quiet through the year instead of dealing with a new pest every few weeks.</p>
+      </div>
+    </div>
+  </section>
+  <FaqList faqs={faqs} title="East Lansing pests: FAQ" sub="Common questions about identifying and controlling pests in East Lansing and mid-Michigan." />
+  <CtaBand />
+</Base>

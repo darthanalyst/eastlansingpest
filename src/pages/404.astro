@@ -1,0 +1,24 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { site, homeServices } from "../data/site.js";
+import { serviceBySlug } from "../data/services.js";
+const svc = homeServices.map((s) => serviceBySlug[s]);
+---
+<Base title="Page not found | East Lansing Pest Control" description="The page you are looking for could not be found. Call 517-293-6988 for pest control in East Lansing, MI." path="/404/">
+  <section class="notfound">
+    <div class="wrap notfound-in">
+      <span class="notfound-code">404</span>
+      <h1>We could not find that page</h1>
+      <p>The page you are looking for may have moved. Let's get you back on track, or just call and connect with a local East Lansing exterminator.</p>
+      <div class="notfound-cta">
+        <a href={site.phoneHref} class="btn btn--green btn--xl"><Icon name="phone" cls="ic" /> Call {site.phone}</a>
+        <a href="/" class="btn btn--ghost btn--xl">Back to home</a>
+      </div>
+      <div class="notfound-links">
+        {svc.map((s) => (<a href={`/${s.slug}/`}><Icon name={s.icon} cls="ic" /> {s.label}</a>))}
+        <a href="/pest-library/"><Icon name="search" cls="ic" /> Pest Library</a>
+      </div>
+    </div>
+  </section>
+</Base>
