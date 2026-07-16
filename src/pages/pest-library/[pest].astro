@@ -25,18 +25,25 @@ const crumbs = [
   title={p.title}
   description={p.meta}
   path={`/pest-library/${p.slug}/`}
+  ogImage={`/images/${p.img}`}
   schema={[orgNode(),
     serviceNode({ name: `${p.name} control`, serviceType: svc.serviceType, description: p.meta, path: `/pest-library/${p.slug}/` }),
     breadcrumb(crumbs),
     faqNode(p.faqs)]}
 >
   <Breadcrumbs items={crumbs} />
-  <section class="pagehead">
-    <div class="wrap">
-      <span class="ahero-tag"><span class="shero-ic"><Icon name={p.icon} cls="ic" /></span> East Lansing Pest Library</span>
-      <h1>{p.h1}</h1>
-      <p>{p.intro}</p>
-      <a href={site.phoneHref} class="btn btn--lime btn--lg"><Icon name="phone" cls="ic" /> Call {site.phone}</a>
+  <section class="shero">
+    <div class="wrap shero-in">
+      <div class="shero-tx">
+        <span class="shero-tag"><span class="shero-ic"><Icon name={p.icon} cls="ic" /></span> East Lansing Pest Library</span>
+        <h1>{p.h1}</h1>
+        <p class="shero-sub">{p.intro}</p>
+        <div class="shero-cta">
+          <a href={site.phoneHref} class="btn btn--green btn--lg"><Icon name="phone" cls="ic" /> Call {site.phone}</a>
+          <span class="shero-note">Same-day help often available in East Lansing</span>
+        </div>
+      </div>
+      <div class="shero-media"><img src={`/images/${p.img}`} alt={p.imgAlt} width="720" height="540" fetchpriority="high" /></div>
     </div>
   </section>
   <section class="sbody">
