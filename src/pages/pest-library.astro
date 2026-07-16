@@ -8,14 +8,14 @@ import { site } from "../data/site.js";
 import { orgNode, breadcrumb, faqNode } from "../lib/schema.js";
 
 const bugs = [
-  { icon: "ant", name: "Ants", blurb: "Pavement and odorous house ants trail into kitchens; carpenter ants tunnel into damp or aging wood. The most common year-round East Lansing pest." },
-  { icon: "spider", name: "Spiders", blurb: "Follow other insects indoors and settle in basements, garages, and window corners. More a nuisance than a danger, but a sign of other pests." },
-  { icon: "rat", name: "Mice", blurb: "House mice pour indoors as Michigan turns cold, nesting in walls, attics, and basements and slipping through gaps the width of a dime." },
-  { icon: "beetle", name: "Fall invaders", blurb: "Boxelder bugs, brown marmorated stink bugs, Asian lady beetles, and cluster flies gather on warm walls each fall and push inside to overwinter." },
-  { icon: "wasp", name: "Wasps & hornets", blurb: "Paper wasps, yellowjackets, and hornets build nests under eaves, in shrubs, and along fences through the summer." },
-  { icon: "mosquito", name: "Mosquitoes & ticks", blurb: "Breed and hide in damp, shaded, and wooded spots near the Red Cedar and lakes. Tick and Lyme pressure has climbed across Michigan." },
-  { icon: "bedbug", name: "Bed bugs", blurb: "Hitchhike in on luggage and furniture and spread fast in a college town. Hide in mattress seams, frames, and nearby cracks." },
-  { icon: "roach", name: "Cockroaches", blurb: "Turn up in kitchens, bathrooms, and shared housing, drawn to warmth, moisture, and food. Best handled early before they establish." },
+  { icon: "ant", name: "Ants", slug: "ants", blurb: "Pavement and odorous house ants trail into kitchens; carpenter ants tunnel into damp or aging wood. The most common year-round East Lansing pest." },
+  { icon: "spider", name: "Spiders", slug: "spiders", blurb: "Follow other insects indoors and settle in basements, garages, and window corners. More a nuisance than a danger, but a sign of other pests." },
+  { icon: "rat", name: "Mice & rats", slug: "mice-and-rats", blurb: "House mice pour indoors as Michigan turns cold, nesting in walls, attics, and basements and slipping through gaps the width of a dime." },
+  { icon: "beetle", name: "Fall invaders", slug: "fall-invaders", blurb: "Boxelder bugs, brown marmorated stink bugs, Asian lady beetles, and cluster flies gather on warm walls each fall and push inside to overwinter." },
+  { icon: "wasp", name: "Wasps & hornets", slug: "wasps-and-hornets", blurb: "Paper wasps, yellowjackets, and hornets build nests under eaves, in shrubs, and along fences through the summer." },
+  { icon: "mosquito", name: "Mosquitoes & ticks", slug: "mosquitoes-and-ticks", blurb: "Breed and hide in damp, shaded, and wooded spots near the Red Cedar and lakes. Tick and Lyme pressure has climbed across Michigan." },
+  { icon: "bedbug", name: "Bed bugs", slug: "bed-bugs", blurb: "Hitchhike in on luggage and furniture and spread fast in a college town. Hide in mattress seams, frames, and nearby cracks." },
+  { icon: "roach", name: "Cockroaches", slug: "cockroaches", blurb: "Turn up in kitchens, bathrooms, and shared housing, drawn to warmth, moisture, and food. Best handled early before they establish." },
 ];
 
 const faqs = [
@@ -41,11 +41,12 @@ const faqs = [
   <section class="pid">
     <div class="wrap pid-grid">
       {bugs.map((b) => (
-        <div class="pid-card">
+        <a class="pid-card" href={`/pest-library/${b.slug}/`}>
           <span class="pid-ic"><Icon name={b.icon} cls="ic" /></span>
           <h3>{b.name}</h3>
           <p>{b.blurb}</p>
-        </div>
+          <span class="pid-more">Learn more <Icon name="arrow" cls="ic" /></span>
+        </a>
       ))}
     </div>
   </section>

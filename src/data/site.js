@@ -23,14 +23,14 @@ export const homeServices = [
 
 // "Which pest are you dealing with?" tiles
 export const pests = [
-  { label: "Ants", icon: "ant", href: "/general-pest-control-east-lansing/" },
-  { label: "Spiders", icon: "spider", href: "/general-pest-control-east-lansing/" },
-  { label: "Mice & rats", icon: "rat", href: "/rodent-control-east-lansing/" },
-  { label: "Wasps & hornets", icon: "wasp", href: "/general-pest-control-east-lansing/" },
-  { label: "Bed bugs", icon: "bedbug", href: "/bed-bug-control-east-lansing/" },
-  { label: "Mosquitoes & ticks", icon: "mosquito", href: "/mosquito-tick-control-east-lansing/" },
-  { label: "Fall invaders", icon: "beetle", href: "/general-pest-control-east-lansing/" },
-  { label: "Cockroaches", icon: "roach", href: "/general-pest-control-east-lansing/" },
+  { label: "Ants", icon: "ant", href: "/pest-library/ants/" },
+  { label: "Spiders", icon: "spider", href: "/pest-library/spiders/" },
+  { label: "Mice & rats", icon: "rat", href: "/pest-library/mice-and-rats/" },
+  { label: "Wasps & hornets", icon: "wasp", href: "/pest-library/wasps-and-hornets/" },
+  { label: "Bed bugs", icon: "bedbug", href: "/pest-library/bed-bugs/" },
+  { label: "Mosquitoes & ticks", icon: "mosquito", href: "/pest-library/mosquitoes-and-ticks/" },
+  { label: "Fall invaders", icon: "beetle", href: "/pest-library/fall-invaders/" },
+  { label: "Cockroaches", icon: "roach", href: "/pest-library/cockroaches/" },
 ];
 
 // Two promise badges (connector-safe: no guarantee, no re-service claim)
