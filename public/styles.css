@@ -329,11 +329,13 @@ section{scroll-margin-top:90px}
 /* pest id grid (library) */
 .pid{padding:54px 0 30px}
 .pid-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.pid-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px 20px;box-shadow:var(--shadow-sm)}
+.pid-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px 20px;box-shadow:var(--shadow-sm);transition:transform .15s,box-shadow .15s}
+.pid-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
 .pid-ic{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:var(--cream);color:var(--green);margin-bottom:12px}
 .pid-ic .ic{width:1.5em;height:1.5em}
 .pid-card h3{font-size:1.1rem;margin-bottom:8px}
 .pid-card p{font-size:.9rem}
+.pid-more{display:inline-flex;align-items:center;gap:7px;margin-top:12px;color:var(--green);font-family:var(--head);font-weight:600;font-size:.9rem}
 .ridbody{padding:24px 0 54px}
 .ridbody-in{display:grid;grid-template-columns:1fr 1fr;gap:34px}
 .ridblock{background:var(--cream);border:1px solid var(--line);border-radius:var(--r);padding:28px}
