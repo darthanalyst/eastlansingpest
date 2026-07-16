@@ -1,6 +1,7 @@
 ---
 import { site, homeServices } from "../data/site.js";
 import { serviceBySlug } from "../data/services.js";
+import { pestPages } from "../data/pests.js";
 import Icon from "./Icon.astro";
 const svc = homeServices.map((s) => serviceBySlug[s]);
 ---
@@ -27,8 +28,13 @@ const svc = homeServices.map((s) => serviceBySlug[s]);
     <nav class="nav" aria-label="Primary">
       <div class="nav-drop">
         <a href="/services/" class="nav-link">Pest Control <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
-        <div class="drop-menu">
+        <div class="drop-menu drop-menu--wide">
+          <span class="drop-head">Services</span>
           {svc.map((s) => (<a href={`/${s.slug}/`}><Icon name={s.icon} cls="ic" /><span>{s.label}</span></a>))}
+          <span class="drop-head">Common pests</span>
+          <div class="drop-pests">
+            {pestPages.map((p) => (<a href={`/pest-library/${p.slug}/`}><Icon name={p.icon} cls="ic" /><span>{p.name}</span></a>))}
+          </div>
         </div>
       </div>
       <a href="/pest-control-okemos/" class="nav-link">Service Area</a>
@@ -48,6 +54,8 @@ const svc = homeServices.map((s) => serviceBySlug[s]);
 <div class="mnav" id="mnav">
   {svc.map((s) => (<a href={`/${s.slug}/`}>{s.label}</a>))}
   <a href="/services/">All Pest Services</a>
+  <span class="mnav-head">Common pests</span>
+  {pestPages.map((p) => (<a href={`/pest-library/${p.slug}/`}>{p.name}</a>))}
   <a href="/pest-control-okemos/">Service Area</a>
   <a href="/pest-library/">Pest Library</a>
   <a href="/about/">About</a>
