@@ -1,0 +1,67 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import FaqList from "../../components/FaqList.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Icon from "../../components/Icon.astro";
+import { site } from "../../data/site.js";
+import { pestPages, pestBySlug } from "../../data/pests.js";
+import { serviceBySlug } from "../../data/services.js";
+import { orgNode, serviceNode, breadcrumb, faqNode } from "../../lib/schema.js";
+
+export function getStaticPaths() {
+  return pestPages.map((p) => ({ params: { pest: p.slug } }));
+}
+const { pest } = Astro.params;
+const p = pestBySlug[pest];
+const svc = serviceBySlug[p.related];
+const crumbs = [
+  { name: "Home", path: "/" },
+  { name: "Pest Library", path: "/pest-library/" },
+  { name: p.name, path: `/pest-library/${p.slug}/` },
+];
+---
+<Base
+  title={p.title}
+  description={p.meta}
+  path={`/pest-library/${p.slug}/`}
+  schema={[orgNode(),
+    serviceNode({ name: `${p.name} control`, serviceType: svc.serviceType, description: p.meta, path: `/pest-library/${p.slug}/` }),
+    breadcrumb(crumbs),
+    faqNode(p.faqs)]}
+>
+  <Breadcrumbs items={crumbs} />
+  <section class="pagehead">
+    <div class="wrap">
+      <span class="ahero-tag"><span class="shero-ic"><Icon name={p.icon} cls="ic" /></span> East Lansing Pest Library</span>
+      <h1>{p.h1}</h1>
+      <p>{p.intro}</p>
+      <a href={site.phoneHref} class="btn btn--lime btn--lg"><Icon name="phone" cls="ic" /> Call {site.phone}</a>
+    </div>
+  </section>
+  <section class="sbody">
+    <div class="wrap sbody-in">
+      <article class="sbody-main">
+        {p.sections.map((sec) => (<div class="sblock"><h2>{sec.h2}</h2>{sec.body.map((t) => <p>{t}</p>)}</div>))}
+        <div class="sblock">
+          <h2>Related pest control service</h2>
+          <div class="rel-row">
+            <a class="rel-card" href={`/${svc.slug}/`}><span class="rel-ic"><Icon name={svc.icon} cls="ic" /></span><span>{svc.label}</span></a>
+            <a class="rel-card" href="/pest-library/"><span class="rel-ic"><Icon name="search" cls="ic" /></span><span>All East Lansing pests</span></a>
+          </div>
+        </div>
+      </article>
+      <aside class="sbody-side">
+        <div class="side-card side-card--call">
+          <h3>Dealing with {p.name.toLowerCase()}?</h3>
+          <p>Call and connect with a local East Lansing exterminator serving the whole Lansing area.</p>
+          <a href={site.phoneHref} class="btn btn--lime btn--full"><Icon name="phone" cls="ic" /> {site.phone}</a>
+          <span class="side-hours"><Icon name="clock" cls="ic" /> {site.hoursLine}</span>
+        </div>
+        <div class="side-card side-card--areas"><h3>Service area</h3><p>East Lansing · Okemos · Haslett · Lansing · Holt · Mason · Williamston · DeWitt</p></div>
+      </aside>
+    </div>
+  </section>
+  <FaqList faqs={p.faqs} title={`${p.name} in East Lansing: FAQ`} sub={`Common questions about ${p.name.toLowerCase()} in East Lansing and mid-Michigan.`} />
+  <CtaBand title="Got pests?" em="Let's take care of it." text={`Call now and connect with a local exterminator for ${p.name.toLowerCase()} in East Lansing. Describe what you are dealing with and get honest help. Same-day service is often available.`} />
+</Base>
