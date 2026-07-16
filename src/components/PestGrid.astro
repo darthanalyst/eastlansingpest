@@ -1,0 +1,18 @@
+---
+import { pests } from "../data/site.js";
+import Icon from "./Icon.astro";
+---
+<section class="pgrid">
+  <div class="wrap pgrid-head">
+    <span class="overline overline--g">We have a plan for every pest problem</span>
+    <h2>If it creeps, crawls, bites, or stings... <b>we have you covered</b></h2>
+  </div>
+  <div class="wrap pgrid-row">
+    {pests.map((p) => (
+      <a class="ptile" href={p.href}>
+        <span class="ptile-ic"><Icon name={p.icon} cls="ic" /></span>
+        <span>{p.label}</span>
+      </a>
+    ))}
+  </div>
+</section>

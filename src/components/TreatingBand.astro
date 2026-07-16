@@ -1,0 +1,18 @@
+---
+import { site } from "../data/site.js";
+import Icon from "./Icon.astro";
+const scatter = ["spider", "ant", "wasp", "beetle", "mosquito", "roach", "bedbug", "rat"];
+---
+<section class="treat">
+  <div class="wrap treat-in">
+    <div class="treat-art" aria-hidden="true">
+      {scatter.map((n, i) => (<span class={`bug bug--${i}`}><Icon name={n} cls="ic" /></span>))}
+    </div>
+    <div class="treat-tx">
+      <span class="overline overline--g">Built for the seasons</span>
+      <h2>Handling the pests Michigan homes deal with</h2>
+      <p>Our plan is built around the pests that actually show up in East Lansing through the year, from spring ants and summer spiders, wasps, mosquitoes, and ticks to the fall wave of boxelder bugs, stink bugs, and Asian lady beetles, plus the mice that follow the cold indoors. One plan, timed to the season, so the pressure never gets ahead of you.</p>
+      <a href={site.phoneHref} class="btn btn--green btn--lg"><Icon name="phone" cls="ic" /> Call {site.phone}</a>
+    </div>
+  </div>
+</section>

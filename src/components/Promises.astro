@@ -1,0 +1,22 @@
+---
+import { site, promises } from "../data/site.js";
+import Icon from "./Icon.astro";
+---
+<section class="prom">
+  <div class="wrap prom-in">
+    <div class="prom-badges">
+      {promises.map((p) => (
+        <div class="prom-badge">
+          <span class="prom-ring"><b>{p.big}</b></span>
+          <p>{p.small}</p>
+        </div>
+      ))}
+    </div>
+    <div class="prom-tx">
+      <span class="overline overline--g">What you can count on</span>
+      <h2>Local help, when you actually need it</h2>
+      <p>Pest control works best when it is quick and local. When you call, you connect with an East Lansing exterminator who knows the area and the season, often the same day. No call centers, no runaround, just a local team that treats the problem and tells you straight what it takes to keep it handled.</p>
+      <a href={site.phoneHref} class="btn btn--green btn--lg"><Icon name="phone" cls="ic" /> Call {site.phone}</a>
+    </div>
+  </div>
+</section>

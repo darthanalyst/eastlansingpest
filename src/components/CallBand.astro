@@ -1,0 +1,22 @@
+---
+import { site } from "../data/site.js";
+import Icon from "./Icon.astro";
+---
+<section class="callband">
+  <div class="wrap callband-in">
+    <div class="callband-media">
+      <img src="/images/tech.jpg" alt="Local East Lansing pest control technician at a home" width="480" height="420" loading="lazy" />
+    </div>
+    <div class="callband-card">
+      <h2>Talk to a local exterminator</h2>
+      <p>Call and describe what you are dealing with, ants in the kitchen, wasps under the eaves, mice in the basement, fall invaders on the siding, and get connected with a local East Lansing exterminator who can help.</p>
+      <a href={site.phoneHref} class="btn btn--pill btn--xl btn--full"><Icon name="phone" cls="ic" /> {site.phone}</a>
+      <p class="callband-hours"><Icon name="clock" cls="ic" /> {site.hoursLine} · Same-day help available</p>
+      <ul class="callband-list">
+        <li><Icon name="check" cls="ic" /> No forms, no waiting, just a phone call</li>
+        <li><Icon name="check" cls="ic" /> Local crew that knows Michigan pests</li>
+        <li><Icon name="check" cls="ic" /> Interior and exterior covered</li>
+      </ul>
+    </div>
+  </div>
+</section>

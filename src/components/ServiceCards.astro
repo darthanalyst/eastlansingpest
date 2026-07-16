@@ -1,0 +1,24 @@
+---
+import { site, homeServices } from "../data/site.js";
+import { serviceBySlug } from "../data/services.js";
+import Icon from "./Icon.astro";
+const svc = homeServices.map((s) => serviceBySlug[s]);
+---
+<section class="svc">
+  <div class="wrap svc-grid">
+    {svc.map((s) => (
+      <div class="svc-card">
+        <span class="svc-ic"><Icon name={s.icon} cls="ic" /></span>
+        <h3>{s.label}</h3>
+        <p>{s.card}</p>
+        <ul class="svc-checks">
+          {s.checks.slice(0, 4).map((c) => (<li><Icon name="check" cls="ic" />{c}</li>))}
+        </ul>
+        <div class="svc-cta">
+          <a href={`/${s.slug}/`} class="btn btn--green btn--full">Learn more</a>
+          <a href={site.phoneHref} class="svc-call">or call {site.phone}</a>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

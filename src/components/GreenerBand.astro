@@ -1,0 +1,25 @@
+---
+import { site, greenPoints } from "../data/site.js";
+import Icon from "./Icon.astro";
+---
+<section class="green">
+  <div class="wrap green-in">
+    <div class="green-tx">
+      <span class="overline overline--g">We take the local thing to heart</span>
+      <h2>Pest control done the right way</h2>
+      <p class="green-lead">Good pest control is not about spraying everything and hoping. It is about knowing what you have, where it lives, and how the Michigan seasons move it, then treating with care.</p>
+      <div class="green-points">
+        {greenPoints.map((g) => (
+          <div class="green-point">
+            <span class="green-ic"><Icon name={g.icon} cls="ic" /></span>
+            <div><b>{g.title}</b><span>{g.text}</span></div>
+          </div>
+        ))}
+      </div>
+      <a href={site.phoneHref} class="btn btn--green btn--lg"><Icon name="phone" cls="ic" /> Call {site.phone}</a>
+    </div>
+    <div class="green-media">
+      <img src="/images/green.jpg" alt="Careful pest control around an East Lansing home and yard" width="440" height="520" loading="lazy" />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+---
+import { steps } from "../data/site.js";
+---
+<section class="proc">
+  <div class="wrap proc-head">
+    <span class="overline overline--g">Getting the job done right</span>
+    <h2>Our 6-step pest control process</h2>
+    <p>We cover your home from the foundation to the roofline, inside and out.</p>
+  </div>
+  <div class="wrap proc-in">
+    <ol class="proc-list">
+      {steps.map((s) => (
+        <li class="proc-step">
+          <span class="proc-n">{s.n}</span>
+          <div><b>{s.title}</b><span>{s.text}</span></div>
+        </li>
+      ))}
+    </ol>
+    <div class="proc-media">
+      <img src="/images/house.jpg" alt="East Lansing home treated inside and out for pests" width="520" height="440" loading="lazy" />
+    </div>
+  </div>
+</section>

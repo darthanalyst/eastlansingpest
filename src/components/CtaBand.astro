@@ -1,0 +1,17 @@
+---
+import { site } from "../data/site.js";
+import Icon from "./Icon.astro";
+const { title = "Got pests?", em = "Let's take care of it.", text = "Call now and connect with a local East Lansing exterminator. Describe what you are dealing with and get honest help. Same-day service is often available." } = Astro.props;
+---
+<section class="cta">
+  <div class="wrap cta-in">
+    <div class="cta-tx">
+      <h2>{title} <span>{em}</span></h2>
+      <p>{text}</p>
+    </div>
+    <div class="cta-act">
+      <a href={site.phoneHref} class="btn btn--lime btn--xl"><Icon name="phone" cls="ic" /> Call {site.phone}</a>
+      <span class="cta-hours">{site.hoursLine}</span>
+    </div>
+  </div>
+</section>
