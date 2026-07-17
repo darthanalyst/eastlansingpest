@@ -5,6 +5,11 @@ import Icon from "./Icon.astro";
 const svc = homeServices.map((s) => serviceBySlug[s]);
 ---
 <section class="svc">
+  <div class="wrap sec-head">
+    <span class="overline overline--g">What we handle</span>
+    <h2>Pest control services in East Lansing</h2>
+    <p>One local team for the pests Michigan homes actually deal with, from spring ants to the fall invaders, handled inside and out.</p>
+  </div>
   <div class="wrap svc-grid">
     {svc.map((s) => (
       <div class="svc-card">
